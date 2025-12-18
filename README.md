@@ -58,6 +58,7 @@ npm run dev
 
 Backend: Ruby on Rails
 Database: PostgreSQL
+Cache: Rails cache.
 Frontend: React con JS
 Nota: Tengo conocimientos en todas las tecnologías listadas para escribir los prompts y son las que se usan en Reservamos.
 
@@ -91,6 +92,41 @@ más global y se le da responsabilidad única a cada cosa.
 - Probar después de terminar cada uno.
 
 Nota: Durante todo el proceso de generación de código por prompts me aseguré de supervisar que la lógica tuviera sentido. Para afinar los prompts intenté copiar la misma estructura según lo que necesité mientras el agente tenía el contexto. 
+
+## Pantallas
+
+### Pantalla de login
+![No se puede acceder a la imagen](weather-app/src/assets/screenshots/login.png)
+
+- Se deben llenar los campos.
+- Se puede ir a la pantalla de registro.
+- Validacion de campos faltantes.
+
+### Pantalla de registro
+![No se puede acceder a la imagen](weather-app/src/assets/screenshots/register.png)
+
+- Se deben llenar los campos.
+- Se puede ir a la pantalla de login.
+
+### Pantalla de home
+![No se puede acceder a la imagen](weather-app/src/assets/screenshots/homepage.png)
+
+- Se puede cerrar sesion desde el navbar.
+- Se puede ir a la pagina del listado de ciudades desde el navbar.
+
+### Pantalla de listado de ciudades
+![No se puede acceder a la imagen](weather-app/src/assets/screenshots/list_of_cities.png)
+
+- Se puede cerrar sesion desde el navbar.
+- Se puede ir a la pantalla de inicio desde el navbar.
+- Se le puede dar click a una ciudad y eso lleva a la pantalla de pronostico del clima.
+
+### Pantalla del pronostico del clima
+![No se puede acceder a la imagen](weather-app/src/assets/screenshots/weather_forecast_5days.png)
+
+- Se puede cerrar sesion desde el navbar.
+- Se puede ir a inicio desde el navbar.
+- Se puede volver al listado de climas.
 
 ## Prompts Backend
 
@@ -495,24 +531,3 @@ Componentes:
 Navegación:
 - Integrar la vista en el router existente
 - Mantener navegación fluida
-
-### Último ajuste al navbar para aplicar el Phone-Friendly
-Manten todo lo anterior exactamente igual menos el navbar.
-
-Contexto:
-- El navbar tiene un buen diseño y colores, pero cuando se usa en un dispositivo móvil el navbar ocupa la mitad de la pantalla de la parte de arriba y arruina mucho la experiencia de usuario.
-
-Objetivo:
-- Permitir que el navbar sea más Phone-Friendly
-- Si no es suficiente espacio agregar un menú hamburguesa para acceder a Inicio y Clima
-- Si no es suficiente espacio cambiar de tamaño el botón de cerrar sesión
-
-UI:
-- Clara e intuitiva
-- Mobile-friendly
-- No se requiere pixel perfect
-
-Componentes:
-- Separar:
-    - Vista
-    - Lógica
