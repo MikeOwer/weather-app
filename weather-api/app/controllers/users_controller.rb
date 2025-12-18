@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   include Authenticable
-  skip_before_action :verify_authenticity_token
   before_action :set_user, only: [ :show, :update, :destroy ]
 
   def index
