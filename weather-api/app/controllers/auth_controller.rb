@@ -1,5 +1,4 @@
 class AuthController < ApplicationController
-  skip_before_action :verify_authenticity_token
 
   def register
     result = AuthenticationService.register(user_params)

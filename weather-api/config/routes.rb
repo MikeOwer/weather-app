@@ -11,4 +11,13 @@ Rails.application.routes.draw do
 
   # User CRUD routes
   resources :users, only: [ :index, :show, :update, :destroy ]
+
+  # Weather routes
+  get "/weather/forecast", to: "weather#forecast"
+  get "/weather/:id", to: "weather#show"
+  get "/weather/current", to: "weather#current_weather"
+  get "/weather/days", to: "weather#five_day_forecast"
+
+  # Cities routes
+  get "/cities", to: "cities#index"
 end
