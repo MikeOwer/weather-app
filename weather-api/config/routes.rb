@@ -13,12 +13,6 @@ Rails.application.routes.draw do
   resources :users, only: [ :index, :show, :update, :destroy ]
 
   # Weather routes
-  get "/weather/forecast", to: "weather#forecast"
   get "/weather/current", to: "weather#current_weather"
   get "/weather/days", to: "weather#five_day_forecast"
-  get "/weather/:id", to: "weather#show"
- 
-
-  # Cities routes
-  get "/cities", to: "cities#index"
 end

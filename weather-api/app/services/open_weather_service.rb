@@ -12,17 +12,6 @@ class OpenWeatherService
     validate_configuration!
   end
 
-  def get_forecast(lat:, lon:)
-    validate_coordinates!(lat, lon)
-
-    response = make_request(lat: lat, lon: lon)
-    parse_response(response)
-  rescue Faraday::ConnectionFailed, Faraday::TimeoutError => e
-    handle_network_error(e)
-  rescue Faraday::Error => e
-    handle_faraday_error(e)
-  end
-
   def get_current_weather_for_cities
     cities_result = ReservamosCitiesService.new.get_cities
     return cities_result unless cities_result[:success]
@@ -67,39 +56,7 @@ class OpenWeatherService
     handle_faraday_error(e)
   end
 
-  def get_weather_by_coordinates(lat:, lon:)
-    validate_coordinates!(lat, lon)
-
-    # Buscar ciudad en Reservamos con las mismas coordenadas
-    city = find_city_by_coordinates(lat, lon)
-    return { success: false, error: "City not found for the provided coordinates" } unless city
-
-    # Obtener clima para esa ciudad (con caché)
-    weather_info = get_current_weather_for_city(city)
-
-    if weather_info
-      { success: true, data: weather_info }
-    else
-      { success: false, error: "Failed to fetch weather data for the city" }
-    end
-  rescue ArgumentError => e
-    { success: false, error: e.message }
-  rescue StandardError => e
-    { success: false, error: "An error occurred: #{e.message}" }
-  end
-
   private
-
-  def find_city_by_coordinates(lat, lon)
-    cities_result = ReservamosCitiesService.new.get_cities
-    return nil unless cities_result[:success]
-
-    # Buscar ciudad que coincida con lat/lon
-    cities_result[:data].find do |city|
-      city["lat"].to_f.round(4) == lat.to_f.round(4) &&
-      city["long"].to_f.round(4) == lon.to_f.round(4)
-    end
-  end
 
   def validate_configuration!
     if @api_key.nil? || @api_key.empty?
